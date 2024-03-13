@@ -1,0 +1,24 @@
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="bean">
+    
+    <class name="Occuper" table="OCCUPER">
+        <id name="id" column="id">
+            <generator class = "increment"/>
+        </id>
+        
+        <property name="date" type="java.util.Date">
+            <column name="Date" />
+        </property>
+        
+        <property name="heure" type="java.lang.String">
+            <column name="Heure" />
+        </property>
+
+        <many-to-one name="codeprof" class="bean.Prof"  column="codeprof"/>
+        <many-to-one name="codesal" class="bean.Salle"  column="CodeSal"/>
+
+    </class>
+    
+</hibernate-mapping>
