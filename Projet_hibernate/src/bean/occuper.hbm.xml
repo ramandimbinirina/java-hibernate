@@ -11,10 +11,6 @@
         <property name="date" type="java.util.Date">
             <column name="Date" />
         </property>
-        
-        <property name="heure" type="java.lang.String">
-            <column name="Heure" />
-        </property>
 
         <many-to-one name="codeprof" class="bean.Prof"  column="codeprof"/>
         <many-to-one name="codesal" class="bean.Salle"  column="CodeSal"/>

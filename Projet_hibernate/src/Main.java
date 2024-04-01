@@ -10,6 +10,7 @@
 import bean.Occuper;
 import bean.Prof;
 import bean.Salle;
+import bean.DateBean;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;

@@ -17,16 +17,15 @@ public class Occuper implements Serializable {
     private Date date;
     private Prof codeprof;
     private Salle codesal;
-    private String heure;
+;
 
     public Occuper() {
     }
 
-    public Occuper(Date date, Prof codeprof, Salle codesal, String heure) {
+    public Occuper(Date date, Prof codeprof, Salle codesal) {
         this.date = date;
         this.codeprof = codeprof;
         this.codesal = codesal;
-        this.heure = heure;
     }
 
     public int getId() {
@@ -59,14 +58,6 @@ public class Occuper implements Serializable {
 
     public void setCodesal(Salle codesal) {
         this.codesal = codesal;
-    }
-
-    public String getHeure() {
-        return heure;
-    }
-
-    public void setHeure(String heure) {
-        this.heure = heure;
     }
     
 }

@@ -43,43 +43,7 @@ public class OccuperManager {
         return occupe;
     }
 
-    public boolean checkOccupation(String codeProf, String codeSal, Date date, String heure) {
-        Session session = null;
-        try {
-            session = hibernateUtil.getSessionFactory().getCurrentSession();
-            session.beginTransaction();
-
-            // Recherche d'une occupation existante pour le professeur, la salle et la date donnés
-            Query query = session.createQuery("FROM Occuper WHERE codeprof.codeprof = :codeProf AND codesal.codesal = :codeSal AND date = :date AND heure =:heure ");
-            query.setParameter("codeProf", codeProf);
-            query.setParameter("codeSal", codeSal);
-            query.setParameter("date", date);
-            query.setParameter("heure", heure);
-
-            List<Occuper> result = query.list();
-
-            // Vérifier si une occupation existe déjà avec un professeur différent
-            for (Occuper occuper : result) {
-                if (!occuper.getCodeprof().getCodeprof().equals(codeProf)) {
-                    return true; // Une occupation existe déjà pour cette salle, date et heure avec un professeur différent
-                }
-            }
-
-            session.getTransaction().commit();
-
-            // Si une occupation existe déjà pour cette heure spécifique, retourner true
-            return false;
-
-        } catch (Exception e) {
-            if (session != null && session.getTransaction() != null) {
-                session.getTransaction().rollback();
-            }
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    public void ajouterOccuper(Prof CodeProf, Salle codeSalle, Date date, String heure) {
+    public void ajouterOccuper(Prof CodeProf, Salle codeSalle, Date date) {
         Session session = hibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
@@ -87,19 +51,17 @@ public class OccuperManager {
         occuper.setDate(date);
         occuper.setCodeprof(CodeProf);
         occuper.setCodesal(codeSalle);
-        occuper.setHeure(heure);
 
         session.save(occuper);
         session.getTransaction().commit();
     }
 
-    public void modifierOccuper(int id, Prof codeProf, Salle codeSalle, Date date, String heure) {
+    public void modifierOccuper(int id, Prof codeProf, Salle codeSalle, Date date) {
         Session session = hibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
         Occuper occuper = (Occuper) session.load(Occuper.class, id);
         occuper.setDate(date);
-        occuper.setHeure(heure);
         occuper.setCodeprof(codeProf);
         occuper.setCodesal(codeSalle);
 
